@@ -62,8 +62,8 @@ export default function Visualize(props) {
         <ScatterChart width={730} height={250}
           margin={{ top: 20, right: 20, bottom: 10, left: 10 }}>
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey={in_value} name="Input" range={[0, 10000]}/>
-          <YAxis dataKey={out_value} name={out_value} range={[0, 10000]}/>
+          <XAxis type="number" dataKey={in_value} name={in_value} range={[0, 10000]}/>
+          <YAxis type="number" dataKey={out_value} name={out_value} range={[0, 10000]}/>
           <Tooltip cursor={{ strokeDasharray: '3 3' }} />
           <Legend />
           <Scatter name={in_value} data={graph_data} fill="#8884d8" />
