@@ -6,7 +6,7 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
-import { parseInputData, parseOutputData, parseGraphData } from '../utils/DataParser';
+import { parseGraphData } from '../utils/DataParser';
 import { ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import Grid from '@mui/material/Grid';
 
