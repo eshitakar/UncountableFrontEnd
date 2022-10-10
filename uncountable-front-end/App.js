@@ -8,6 +8,7 @@ import Data from './components/Data';
 import Visualize from './components/Visualize';
 import TableViewOutlinedIcon from '@mui/icons-material/TableViewOutlined';
 import InsertChartOutlinedIcon from '@mui/icons-material/InsertChartOutlined';
+import data from './data/dataset.json';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -48,6 +49,19 @@ export default function App() {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+  var sorted1 = Object.keys(data).sort((a, b) => parseInt(a.split("_")[2]) - parseInt(b.split("_")[2]));
+  var sorted2 = sorted1.sort((a, b) => parseInt(a.split("_")[0]) - parseInt(b.split("_")[0]));
+  var parsed_data = []
+  sorted2.forEach((key) => {
+    var exp_num = key.split("_")[2];
+    var un_date = key.split("_")[0];
+    var empty = "";
+    var date = empty.concat(un_date.substring(4, 6), "/", un_date.substring(6), "/", un_date.substring(0, 4));
+    parsed_data.push([exp_num, date, data[key]]);
+  }) 
+  var first = parsed_data[0]
+  var input_cats = Object.keys(first[2]["inputs"])
+  var output_cats = Object.keys(first[2]["outputs"])
 
   return (
     <Box
@@ -68,11 +82,11 @@ export default function App() {
       </Tabs>
       <TabPanel value={value} index={0}>
         <Box sx={{ width: '100%' }}>
-          <Data/>
+          <Data data={parsed_data}/>
         </Box>
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <Visualize/>
+        <Visualize cat_in={input_cats} cat_out={output_cats} data={parsed_data}/>
       </TabPanel>
     </Box>
   );

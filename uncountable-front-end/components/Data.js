@@ -5,40 +5,11 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import data from './dataset.json';
 import IO from './IO';
 
-//const [data,setData]=useState([]);
 
-// const getData=()=>{
-//     fetch('./dataset.json'
-//         ,{
-//             headers : { 
-//                 'Content-Type': 'application/json',
-//                 'Accept': 'application/json'
-//             }
-//         }
-//     ).then(function(response){
-//         console.log(response)
-//         return response.json();
-//     }).then(function(myJson) {
-//         console.log(myJson);
-//         setData(myJson)
-//     });
-// }
-// useEffect(()=>{getData()},[])
-export default function Data() {
-    var sorted1 = Object.keys(data).sort((a, b) => parseInt(a.split("_")[2]) - parseInt(b.split("_")[2]));
-    var sorted2 = sorted1.sort((a, b) => parseInt(a.split("_")[0]) - parseInt(b.split("_")[0]));
-    var parsed_data = []
-    sorted2.forEach((key) => {
-        var exp_num = key.split("_")[2];
-        var un_date = key.split("_")[0];
-        var empty = "";
-        var date = empty.concat(un_date.substring(4, 6), "/", un_date.substring(6), "/", un_date.substring(0, 4));
-        console.log(date)
-        parsed_data.push([exp_num, date, data[key]]);
-    }) 
+export default function Data(props) {
+    var parsed_data = props.data;
     return(
     <Box sx={{ height: 400, width: '100%' }}>
         <Accordion>
