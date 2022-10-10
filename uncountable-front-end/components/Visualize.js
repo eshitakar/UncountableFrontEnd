@@ -1,5 +1,6 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -7,6 +8,7 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import { parseInputData, parseOutputData, parseGraphData } from '../utils/DataParser';
 import { ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import Grid from '@mui/material/Grid';
 
 export default function Visualize(props) {
   const [in_value, setInValue] = React.useState('');
@@ -26,7 +28,8 @@ export default function Visualize(props) {
   var graph_data = parseGraphData(props.data)
   return (
     <Box>
-      <Box sx={{width: '100%' }}>
+        <Grid container spacing={2}>
+        <Grid item xs={2}>
         <FormControl>
           <FormLabel id="demo-controlled-radio-buttons-group">Inputs</FormLabel>
           <RadioGroup
@@ -42,6 +45,8 @@ export default function Visualize(props) {
             })}
           </RadioGroup>
         </FormControl>
+        </Grid>
+        <Grid item xs={2}>
         <FormControl>
           <FormLabel id="demo-controlled-radio-buttons-group">Outputs</FormLabel>
           <RadioGroup
@@ -57,8 +62,8 @@ export default function Visualize(props) {
             })}
           </RadioGroup>
         </FormControl>
-      </Box>
-      <Box>
+        </Grid>
+        <Grid item xs={6}>
         <ScatterChart width={730} height={250}
           margin={{ top: 20, right: 20, bottom: 10, left: 10 }}>
           <CartesianGrid strokeDasharray="3 3" />
@@ -68,7 +73,8 @@ export default function Visualize(props) {
           <Legend />
           <Scatter name={in_value} data={graph_data} fill="#8884d8" />
         </ScatterChart>
-      </Box>
+        </Grid>
+        </Grid>
     </Box>
     
   );

@@ -82,7 +82,7 @@ export default function App() {
       </Tabs>
       <TabPanel value={value} index={0}>
         <Box sx={{ width: '100%' }}>
-          <Data data={parsed_data}/>
+          <Data cat_in={input_cats} cat_out={output_cats} data={parsed_data}/>
         </Box>
       </TabPanel>
       <TabPanel value={value} index={1}>
