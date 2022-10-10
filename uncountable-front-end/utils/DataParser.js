@@ -48,3 +48,17 @@ export function parseOutputData(data) {
     ];
     return parsed_outputs;
 }
+
+export function parseGraphData(data) {
+    var jsonArr = [];
+    for(var i = 0; i < data.length; i++){
+        const obj1 = data[i][2]["inputs"];
+        const obj2 = data[i][2]["outputs"];
+        
+        jsonArr.push({
+            ...obj1,
+            ...obj2
+        })
+    }
+    return jsonArr;
+}
