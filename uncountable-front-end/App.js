@@ -9,6 +9,7 @@ import Visualize from './components/Visualize';
 import TableViewOutlinedIcon from '@mui/icons-material/TableViewOutlined';
 import InsertChartOutlinedIcon from '@mui/icons-material/InsertChartOutlined';
 import data from './data/dataset.json';
+import Grid from '@mui/material/Grid';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -64,30 +65,31 @@ export default function App() {
   var output_cats = Object.keys(first[2]["outputs"])
 
   return (
-    <Box
-      sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex', height: 224 }}
-    >
+    <Grid container>
+      <Grid item xs={2}>
       <Tabs
         orientation="vertical"
         variant="scrollable"
         value={value}
         onChange={handleChange}
+        centered
         textColor="secondary"
         indicatorColor="secondary"
         aria-label="Vertical tabs example"
-        sx={{ borderRight: 1, borderColor: 'divider' }}
+        sx={{ borderRight: 1, borderColor: 'divider',  bgcolor: 'background.paper'}}
       >
         <Tab icon={<TableViewOutlinedIcon/>} iconPosition="start" label="Data" {...a11yProps(0)} />
         <Tab icon={<InsertChartOutlinedIcon/>} iconPosition="start" label="Visualize" {...a11yProps(1)} />
       </Tabs>
+      </Grid>
+      <Grid item xs={10} sx={{bgcolor: 'secondary.light'}}>
       <TabPanel value={value} index={0}>
-        <Box sx={{ width: '100%' }}>
-          <Data cat_in={input_cats} cat_out={output_cats} data={parsed_data}/>
-        </Box>
+        <Data cat_in={input_cats} cat_out={output_cats} data={parsed_data}/>
       </TabPanel>
       <TabPanel value={value} index={1}>
         <Visualize cat_in={input_cats} cat_out={output_cats} data={parsed_data}/>
       </TabPanel>
-    </Box>
+      </Grid>
+    </Grid>
   );
 }

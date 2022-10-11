@@ -27,7 +27,7 @@ export default function IO(props) {
                     aria-controls="panel1a-content"
                     id="panel1a-header"
                 >
-                    <Typography>Inputs</Typography>
+                    <Typography sx={{color: 'secondary.dark'}}>Inputs</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                 {parsed_inputs.map(input => {
@@ -38,9 +38,9 @@ export default function IO(props) {
                             <TableContainer component={Paper}>
                             <Table sx={{ minWidth: 650 }} aria-label="simple table">
                                 <TableHead>
-                                <TableRow>
-                                    <TableCell>{input[0]}</TableCell>
-                                    <TableCell align="right">Amount</TableCell>
+                                <TableRow sx={{bgcolor: "secondary.light"}}>
+                                    <TableCell sx={{fontWeight: 'bold'}}>{input[0]}</TableCell>
+                                    <TableCell sx={{fontWeight: 'bold'}} align="right">Amount</TableCell>
                                 </TableRow>
                                 </TableHead>
                                 <TableBody>
@@ -71,15 +71,15 @@ export default function IO(props) {
                     aria-controls="panel1a-content"
                     id="panel1a-header"
                 >
-                    <Typography>Outputs</Typography>
+                    <Typography sx={{color: 'secondary.dark'}}>Outputs</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                 <TableContainer component={Paper}>
                     <Table sx={{ minWidth: 650 }} aria-label="simple table">
                         <TableHead>
-                            <TableRow>
-                                <TableCell>Measurements</TableCell>
-                                <TableCell align="right"></TableCell>
+                            <TableRow sx={{bgcolor: 'secondary.light'}}>
+                                <TableCell sx={{fontWeight: "bold"}}>Measurements</TableCell>
+                                <TableCell sx={{fontWeight: 'bold'}} align="right"></TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody> 

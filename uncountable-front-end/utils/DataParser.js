@@ -22,16 +22,24 @@ export function parseInputData(data) {
             curing_agent.push([key, ins[key]]);
         } 
     });
+    var other = [];
+    if (ins["Antioxidant"] > 0.0) {
+        other.push(["Antioxidant", ins["Antioxidant"]])
+    }
+    if (ins["Coloring Pigment"] > 0.0) {
+        other.push(["Coloring Pigment", ins["Coloring Pigment"]])
+    }
+    if (ins["Oven Temperature"] > 0.0) {
+        other.push(["Oven Temperature", ins["Oven Temperature"]])
+    }
     parsed_inputs = [
         ["Polymer", polymers],
         ["Carbon Black", carbon_black],
         ["Silica", silica],
         ["Plasticizer", plasti],
         ["Co-Agent", co_agent],
-        ["Curing_Agent", curing_agent],
-        ["Antioxidant", [ins["Antioxidant"]]],
-        ["Coloring Pigment", [ins["Coloring Pigment"]]],
-        ["Oven Temperature", [ins["Oven Temperature"]]]
+        ["Curing Agent", curing_agent],
+        ["Other", other],
     ];
 
     return parsed_inputs;

@@ -29,9 +29,13 @@ export default function Visualize(props) {
   return (
     <Box>
         <Grid container spacing={2}>
-        <Grid item xs={2}>
+        <Grid item xs={2} sx={{bgcolor: "background.paper"}}>
         <FormControl>
-          <FormLabel id="demo-controlled-radio-buttons-group">Inputs</FormLabel>
+          <FormLabel 
+          sx={{color: 'secondary.dark', fontWeight: "bold"}}
+          >
+            Inputs
+          </FormLabel>
           <RadioGroup
             aria-labelledby="demo-controlled-radio-buttons-group"
             name="controlled-radio-buttons-group"
@@ -40,15 +44,20 @@ export default function Visualize(props) {
           >
             {radio_ins.map(opt => {
               return(
-                <FormControlLabel value={opt} control={<Radio />} label={opt} />
+                <FormControlLabel value={opt} control={<Radio color="secondary"/>} label={opt} />
               );
             })}
           </RadioGroup>
         </FormControl>
         </Grid>
-        <Grid item xs={2}>
+        <Grid item xs={2} sx={{bgcolor: "background.paper"}}>
         <FormControl>
-          <FormLabel id="demo-controlled-radio-buttons-group">Outputs</FormLabel>
+          <FormLabel 
+          id="demo-controlled-radio-buttons-group"
+          sx={{color: 'secondary.dark', fontWeight: "bold"}}
+          >
+            Outputs
+          </FormLabel>
           <RadioGroup
             aria-labelledby="demo-controlled-radio-buttons-group"
             name="controlled-radio-buttons-group"
@@ -57,14 +66,14 @@ export default function Visualize(props) {
           >
             {radio_outs.map(opt => {
               return(
-                <FormControlLabel value={opt} control={<Radio />} label={opt} />
+                <FormControlLabel value={opt} control={<Radio color="secondary"/>} label={opt} />
               );
             })}
           </RadioGroup>
         </FormControl>
         </Grid>
-        <Grid item xs={6}>
-        <ScatterChart width={730} height={250}
+        <Grid item xs={8} sx={{bgcolor: "background.paper"}}>
+        <ScatterChart width={700} height={250}
           margin={{ top: 20, right: 20, bottom: 10, left: 10 }}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis type="number" dataKey={in_value} name={in_value} range={[0, 10000]}/>
