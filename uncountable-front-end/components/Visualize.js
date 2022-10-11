@@ -98,7 +98,7 @@ export default function Visualize(props) {
                   <YAxis type="number" dataKey={out_value} name={out_value} range={[0, 10000]}/>
                   <Tooltip cursor={{ strokeDasharray: '3 3' }} />
                   <Legend />
-                  <Scatter name={in_value} data={graph_data} fill="#8884d8" />
+                  <Scatter name={in_value} data={graph_data} fill="#ab47bc" />
               </ScatterChart>
             </ResponsiveContainer>
           </Grid>
