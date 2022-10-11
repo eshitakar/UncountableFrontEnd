@@ -22,6 +22,9 @@ function validData(x) {
  * 
  */
 export function parseInputData(data) {
+    if(!data.hasOwnProperty("inputs")) {
+        return []
+    }
     var ins = data["inputs"];
     // instatiate empty arrays to hold specific inputs
     var polymers = [];
@@ -74,6 +77,9 @@ export function parseInputData(data) {
  * 
  */
 export function parseOutputData(data) {
+    if(!data.hasOwnProperty("outputs")) {
+        return [];
+    }
     var outs = data["outputs"];
     var parsed_outputs = [
         ["Viscosity", outs["Viscosity"]],
@@ -84,6 +90,8 @@ export function parseOutputData(data) {
     ];
     return parsed_outputs;
 }
+
+
 
 /** parseGraphData converts json experiment data into a single json
  * object so that it can be ingested by the Recharts library plots
@@ -146,4 +154,21 @@ export function parseTupleData(data) {
         
     })
     return parsed_data;
+}
+
+export function findInputs(data) {
+    data.forEach((e, d, i) => {
+        if(i.hasOwnProperty("inputs") > 0) {
+            return Object.keys(i["inputs"])
+        }
+
+    })
+}
+
+export function findOutputs(data) {
+    data.forEach((e, d, i) => {
+        if(i.hasOwnProperty("outputs") > 0) {
+            return Object.keys(i["outputs"])
+        }
+    })
 }
