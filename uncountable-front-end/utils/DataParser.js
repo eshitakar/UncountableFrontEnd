@@ -30,7 +30,7 @@ export function parseInputData(data) {
             polymers.push([key, ins[key]]);
         } else if (key.startsWith('Carbon Black') && ins[key] > 0.0) {
             carbon_black.push([key, ins[key]]);
-        } else if (key.startsWith('Silica') && ins[key] > 0.0) {
+        } else if (key.startsWith('Silica Filler') && ins[key] > 0.0) {
             silica.push([key, ins[key]]);
         } else if (key.startsWith('Plasticizer') && ins[key] > 0.0) {
             plasti.push([key, ins[key]]);
@@ -47,7 +47,7 @@ export function parseInputData(data) {
     parsed_inputs = [
         ["Polymer", polymers],
         ["Carbon Black", carbon_black],
-        ["Silica", silica],
+        ["Silica Filler", silica],
         ["Plasticizer", plasti],
         ["Co-Agent", co_agent],
         ["Curing Agent", curing_agent],
