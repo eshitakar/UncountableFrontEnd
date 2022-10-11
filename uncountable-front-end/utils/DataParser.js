@@ -8,7 +8,7 @@
  * each tuple contains a category of input and a list input name and > ZERO
  * amounts added to each experiment
  * 
- * @param {*} data(JSON iterable)
+ * @param data(JSON iterable)
  * @returns: parsed_input(tuple array)
  * 
  */
