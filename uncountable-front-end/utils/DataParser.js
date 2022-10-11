@@ -3,6 +3,15 @@
  * this web-app
  */
 
+/** validData checks some data x to check if it is a valid positive int or other datatype
+ * 
+ * @param {*} x 
+ * @returns boolean (True if x is a valid positive int or other data type, false otherwise)
+ */
+function validData(x) {
+    return typeof x == 'number' && (!isNaN(x) && x > 0.0)
+}
+
 
 /** parseInputData converts json experiment data into a list of tuples, where
  * each tuple contains a category of input and a list input name and > ZERO
@@ -26,19 +35,19 @@ export function parseInputData(data) {
 
     // iterate through the input keys and add to correct array if > zero
     Object.keys(ins).forEach((key) => {
-        if(key.startsWith('Polymer') && ins[key] > 0.0) {
+        if(key.startsWith('Polymer') && validData(ins[key])) {
             polymers.push([key, ins[key]]);
-        } else if (key.startsWith('Carbon Black') && ins[key] > 0.0) {
+        } else if (key.startsWith('Carbon Black') && validData(ins[key])) {
             carbon_black.push([key, ins[key]]);
-        } else if (key.startsWith('Silica Filler') && ins[key] > 0.0) {
+        } else if (key.startsWith('Silica Filler') && validData(ins[key])) {
             silica.push([key, ins[key]]);
-        } else if (key.startsWith('Plasticizer') && ins[key] > 0.0) {
+        } else if (key.startsWith('Plasticizer') && validData(ins[key])) {
             plasti.push([key, ins[key]]);
-        } else if (key.startsWith('Co-Agent') && ins[key] > 0.0) {
+        } else if (key.startsWith('Co-Agent') && validData(ins[key])) {
             co_agent.push([key, ins[key]]);
-        } else if (key.startsWith('Curing Agent') && ins[key] > 0.0) {
+        } else if (key.startsWith('Curing Agent') && validData(ins[key])) {
             curing_agent.push([key, ins[key]]);
-        } else if(ins[key] > 0.0) {
+        } else if(validData(ins[key])) {
             other.push([key, ins[key]])
         }
     });
@@ -86,8 +95,9 @@ export function parseOutputData(data) {
 export function parseGraphData(data) {
     var jsonArr = [];
     for(var i = 0; i < data.length; i++){
-        const obj1 = data[i][2]["inputs"];
-        const obj2 = data[i][2]["outputs"];
+        // make sure we are returning numbers!
+        const obj1 = Object.fromEntries(Object.entries(data[i][2]["inputs"]).filter((k, e) => typeof e == 'number' && !isNaN(e)));
+        const obj2 = Object.fromEntries(Object.entries(data[i][2]["outputs"]).filter((k, e) => typeof e == 'number' && !isNaN(e)));
         
         jsonArr.push({
             ...obj1,
@@ -115,11 +125,25 @@ export function parseTupleData(data) {
     // iterate through each key and format properly to add to array
     var parsed_data = []
     sorted2.forEach((key) => {
-        var exp_num = key.split("_")[2];
-        var un_date = key.split("_")[0];
-        var empty = "";
-        var date = empty.concat(un_date.substring(4, 6), "/", un_date.substring(6), "/", un_date.substring(0, 4));
-        parsed_data.push([exp_num, date, data[key]]);
+        var splitted = key.split("_");
+        // make sure we can parse the experiment correctly -- if not, ignore
+        if (splitted.length == 3) {
+            var exp_num = key.split("_")[2];
+            var un_date = key.split("_")[0];
+            var date = "";
+            // error checking for date string
+            if(un_date.length == 8) {
+                date = date.concat(un_date.substring(4, 6), "/", un_date.substring(6), "/", un_date.substring(0, 4));
+            } else {
+                date = "Invalid date"
+            }
+            // check to see if our experiment number is well defined
+            if(isNaN(Number.parseInt(exp_num))){
+                exp_num = "##";
+            }
+            parsed_data.push([exp_num, date, data[key]]);
+        }
+        
     })
     return parsed_data;
 }

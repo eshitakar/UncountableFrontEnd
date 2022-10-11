@@ -25,6 +25,13 @@ export default function Data(props) {
             <Grid item xs={12}>
             {/*Iterate through parsed_data to render each experiment as an accordion*/}
             {parsed_data.map((e) => {
+                // error checking on date string
+                var date_str = "Conducted "
+                if (e[1] == "Invalid date") {
+                    date_str = ""
+                } else{
+                    date_str = date_str.concat(e[1])
+                }
                 return(
                     <Accordion>
                         <AccordionSummary
@@ -35,7 +42,7 @@ export default function Data(props) {
                             <Typography sx={{ width: '33%', flexShrink: 0, fontWeight: "bold"}}>
                                 Experiment {e[0]}
                             </Typography>
-                            <Typography sx={{ color: 'text.secondary' }} justify="flex-end"> Conducted {e[1]}</Typography>
+                            <Typography sx={{ color: 'text.secondary' }} justify="flex-end"> {date_str}</Typography>
                         </AccordionSummary>
                         <AccordionDetails>
                             {/*Component to render data as a table*/}
