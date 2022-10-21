@@ -19,7 +19,7 @@ import TableViewOutlinedIcon from '@mui/icons-material/TableViewOutlined';
 import InsertChartOutlinedIcon from '@mui/icons-material/InsertChartOutlined';
 
 /*data parser, data, and component imports*/
-import {findInputs, findOutputs, parseTupleData} from './utils/DataParser';
+import {parseTupleData} from './utils/DataParser';
 import data from './data/dataset.json';
 import Data from './components/Data';
 import Visualize from './components/Visualize';
@@ -70,8 +70,9 @@ export default function App() {
   //Instantiating data variables to pass to components
   var parsed_data = parseTupleData(data);
   var first = parsed_data[0]
-  var input_cats = findInputs(parsed_data)
-  var output_cats = findOutputs(parsed_data)
+  var input_cats = Object.keys(first[2]["inputs"])
+  var output_cats = Object.keys(first[2]["outputs"])
+
   return (
     <Grid container>
       {/*Using Grid to flexibly size components*/}

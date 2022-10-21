@@ -104,6 +104,9 @@ export function parseGraphData(data) {
     var jsonArr = [];
     for(var i = 0; i < data.length; i++){
         // make sure we are returning numbers!
+        if(data[i][2].hasOwnProperty("inputs") && data[i][2].hasOwnProperty("outputs")){
+            
+        
         const obj1 = Object.fromEntries(Object.entries(data[i][2]["inputs"]).filter((k, e) => typeof e == 'number' && !isNaN(e)));
         const obj2 = Object.fromEntries(Object.entries(data[i][2]["outputs"]).filter((k, e) => typeof e == 'number' && !isNaN(e)));
         
@@ -111,6 +114,7 @@ export function parseGraphData(data) {
             ...obj1,
             ...obj2
         })
+    }
     }
     return jsonArr;
 }
